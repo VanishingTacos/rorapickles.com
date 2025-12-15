@@ -1,0 +1,257 @@
+:root {
+    /* Color Palette - Cyberpunk/Retro Arcade */
+    --bg-color: #0b0c15;
+    --text-color: #e0e0e0;
+    --primary-color: #ff00ff;
+    /* Neon Pink */
+    --secondary-color: #00ffff;
+    /* Cyan */
+    --accent-color: #39ff14;
+    /* Neon Green (Pickle) */
+    --grid-color: rgba(255, 0, 255, 0.1);
+
+    --font-heading: 'Press Start 2P', cursive;
+    --font-body: 'VT323', monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    /* Retro Grid Background Pattern */
+    background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 30px 30px;
+    background-position: center center;
+}
+
+/* CRT Screen Effects */
+.crt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.6) 100%);
+    pointer-events: none;
+    z-index: 999;
+}
+
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0.15),
+            rgba(0, 0, 0, 0.15) 1px,
+            transparent 1px,
+            transparent 2px);
+    pointer-events: none;
+    z-index: 998;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 10;
+    text-align: center;
+}
+
+/* Profile Section */
+.profile-section {
+    margin-bottom: 2rem;
+    animation: fadeIn 1s ease-out;
+}
+
+.avatar-container {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.5rem;
+    border: 4px solid var(--primary-color);
+    box-shadow: 4px 4px 0px var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    overflow: hidden;
+    /* Ensure image stays inside border */
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: float 3s ease-in-out infinite;
+    display: block;
+    /* Remove inline-block spacing */
+}
+
+/* Glitch Heading Effect */
+.glitch {
+    position: relative;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--secondary-color);
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 var(--accent-color);
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+.bio {
+    color: var(--secondary-color);
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Link Buttons */
+.links-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.retro-btn {
+    display: block;
+    padding: 1rem 2rem;
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    position: relative;
+    transition: all 0.2s;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);
+    overflow: hidden;
+}
+
+.retro-btn:hover {
+    background: var(--primary-color);
+    color: var(--bg-color);
+    box-shadow: 4px 4px 0px var(--secondary-color), 0 0 20px var(--primary-color);
+    transform: translate(-2px, -2px);
+}
+
+.retro-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+}
+
+/* Animations */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes glitch-anim {
+    0% {
+        clip: rect(10px, 9999px, 86px, 0);
+    }
+
+    20% {
+        clip: rect(32px, 9999px, 13px, 0);
+    }
+
+    40% {
+        clip: rect(78px, 9999px, 3px, 0);
+    }
+
+    60% {
+        clip: rect(25px, 9999px, 98px, 0);
+    }
+
+    80% {
+        clip: rect(62px, 9999px, 46px, 0);
+    }
+
+    100% {
+        clip: rect(10px, 9999px, 14px, 0);
+    }
+}
+
+@keyframes glitch-anim-2 {
+    0% {
+        clip: rect(65px, 9999px, 100px, 0);
+    }
+
+    20% {
+        clip: rect(14px, 9999px, 5px, 0);
+    }
+
+    40% {
+        clip: rect(24px, 9999px, 63px, 0);
+    }
+
+    60% {
+        clip: rect(87px, 9999px, 24px, 0);
+    }
+
+    80% {
+        clip: rect(36px, 9999px, 78px, 0);
+    }
+
+    100% {
+        clip: rect(54px, 9999px, 5px, 0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
